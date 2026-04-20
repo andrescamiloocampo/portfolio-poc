@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { CustomCursor } from './components/atoms/Cursor';
 import { Navigation } from './components/organisms/Navigation';
+import { useStore } from './store/useStore';
 import Scene3D from './components/organisms/Scene3D';
 import ParallaxBackground from './components/organisms/ParallaxBackground';
 import './styles/variables.css';
@@ -12,6 +13,7 @@ import './styles/global.css';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
+  const setCursorHovering = useStore((state) => state.setCursorHovering);
   const heroRef = useRef<HTMLElement>(null);
   const servicesRef = useRef<HTMLElement>(null);
   const workRef = useRef<HTMLElement>(null);
@@ -103,10 +105,20 @@ export default function App() {
         </p>
 
         <div className="hero-cta animate-in">
-          <a href="#contact" className="cta-primary">
+          <a 
+            href="#contact" 
+            className="cta-primary"
+            onMouseEnter={(e) => setCursorHovering(true, 'button', e.currentTarget)}
+            onMouseLeave={() => setCursorHovering(false)}
+          >
             <span>Let&apos;s talk</span>
           </a>
-          <a href="#work" className="cta-secondary">
+          <a 
+            href="#work" 
+            className="cta-secondary"
+            onMouseEnter={(e) => setCursorHovering(true, 'button', e.currentTarget)}
+            onMouseLeave={() => setCursorHovering(false)}
+          >
             View work
           </a>
         </div>
@@ -171,7 +183,12 @@ export default function App() {
         <h2 className="section-title">Featured</h2>
 
         <div className="projects-grid">
-          <a href="#" className="project-card project-large">
+          <a 
+            href="#" 
+            className="project-card project-large"
+            onMouseEnter={(e) => setCursorHovering(true, 'project', e.currentTarget)}
+            onMouseLeave={() => setCursorHovering(false)}
+          >
             <div className="project-bg gradient-1" />
             <div className="project-info">
               <span className="project-category">Web App</span>
@@ -180,7 +197,13 @@ export default function App() {
             </div>
           </a>
 
-          <a href="#" className="project-card">
+
+          <a 
+            href="#" 
+            className="project-card"
+            onMouseEnter={(e) => setCursorHovering(true, 'project', e.currentTarget)}
+            onMouseLeave={() => setCursorHovering(false)}
+          >
             <div className="project-bg gradient-2" />
             <div className="project-info">
               <span className="project-category">E-commerce</span>
@@ -188,7 +211,12 @@ export default function App() {
             </div>
           </a>
 
-          <a href="#" className="project-card">
+          <a 
+            href="#" 
+            className="project-card"
+            onMouseEnter={(e) => setCursorHovering(true, 'project', e.currentTarget)}
+            onMouseLeave={() => setCursorHovering(false)}
+          >
             <div className="project-bg gradient-3" />
             <div className="project-info">
               <span className="project-category">Web App</span>

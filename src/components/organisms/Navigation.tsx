@@ -117,8 +117,8 @@ export function Navigation() {
               key={link.href}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              onMouseEnter={() => setCursorHovering(true, 'link')}
-              onMouseLeave={() => setCursorHovering(false)}
+               onMouseEnter={(e) => setCursorHovering(true, 'link', e.currentTarget)}
+               onMouseLeave={() => setCursorHovering(false)}
               style={{
                 position: 'relative',
                 display: 'flex',

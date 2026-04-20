@@ -11,6 +11,7 @@ interface CursorState {
   isHovering: boolean;
   isClicking: boolean;
   hoverTarget: string | null;
+  hoverElement: HTMLElement | null;
 }
 
 interface NavigationState {
@@ -28,7 +29,7 @@ interface AppState {
   navigation: NavigationState;
   animation: AnimationState;
   setCursorPosition: (position: CursorPosition) => void;
-  setCursorHovering: (isHovering: boolean, hoverTarget?: string | null) => void;
+  setCursorHovering: (isHovering: boolean, hoverTarget?: string | null, hoverElement?: HTMLElement | null) => void;
   setCursorClicking: (isClicking: boolean) => void;
   setCurrentSection: (section: string) => void;
   toggleMenu: (isOpen?: boolean) => void;
@@ -37,12 +38,13 @@ interface AppState {
 }
 
 export const useStore = create<AppState>((set) => ({
-  cursor: {
-    position: { x: 0, y: 0 },
-    isHovering: false,
-    isClicking: false,
-    hoverTarget: null,
-  },
+    cursor: {
+      position: { x: 0, y: 0 },
+      isHovering: false,
+      isClicking: false,
+      hoverTarget: null,
+      hoverElement: null,
+    },
   navigation: {
     currentSection: 'hero',
     isMenuOpen: false,
@@ -53,8 +55,8 @@ export const useStore = create<AppState>((set) => ({
   },
   setCursorPosition: (position) =>
     set((state) => ({ cursor: { ...state.cursor, position } })),
-  setCursorHovering: (isHovering, hoverTarget = null) =>
-    set((state) => ({ cursor: { ...state.cursor, isHovering, hoverTarget } })),
+  setCursorHovering: (isHovering, hoverTarget = null, hoverElement = null) =>
+    set((state) => ({ cursor: { ...state.cursor, isHovering, hoverTarget, hoverElement } })),
   setCursorClicking: (isClicking) =>
     set((state) => ({ cursor: { ...state.cursor, isClicking } })),
   setCurrentSection: (currentSection) =>
